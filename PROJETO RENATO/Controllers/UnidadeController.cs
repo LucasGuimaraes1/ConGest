@@ -61,5 +61,24 @@ namespace PROJETO_RENATO.Controllers
             ViewBag.Unidade = unidade;
             return View(unidade);
         }
+
+        public IActionResult Editar(int id)
+        {
+            Contexto db = new Contexto();
+            return View(db.Unidade.Find(id));
+        }
+
+        [HttpPost]
+        public IActionResult Editar(Unidade unidade)
+        {
+            Contexto db = new Contexto();
+            if (unidade == null)
+            {
+                return View(unidade);
+            }
+            db.Unidade.Update(unidade);
+            db.SaveChanges();
+            return RedirectToAction("ListarUnidades", 9);
+        }
     }
 }

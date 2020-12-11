@@ -1,0 +1,46 @@
+﻿@model PROJETO_RENATO.Models.Unidade
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<h1>Editar</h1>
+
+<h4>Unidade</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Editar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdUnidade" />
+            <div class="form-group">
+                <label asp-for="TipoDeUnidade" class="control-label"></label>
+                <input asp-for="TipoDeUnidade" class="form-control" />
+                <span asp-validation-for="TipoDeUnidade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdMorador" class="control-label"></label>
+                <input asp-for="IdMorador" class="form-control" />
+                <span asp-validation-for="IdMorador" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumeroUnidade" class="control-label"></label>
+                <input asp-for="NumeroUnidade" class="form-control" />
+                <span asp-validation-for="NumeroUnidade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="idCondominio" class="control-label"></label>
+                <input asp-for="idCondominio" class="form-control" />
+                <span asp-validation-for="idCondominio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -7,7 +7,7 @@
 <h1>Listar Unidades</h1>
 
 <p>
-    @Html.ActionLink("Criar Novo","AdicionarUnidade", "Unidade", new { condominioID = ViewBag.CondominioID }, new { @class= "btn btn-primary"})
+    @Html.ActionLink("Criar Novo", "AdicionarUnidade", "Unidade", new { condominioID = ViewBag.CondominioID }, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <thead>
@@ -19,10 +19,7 @@
                 Numero da Unidade
             </th>
             <th>
-                Morador
-            </th>
-            <th>
-                CPF do Morador
+                Proprietário
             </th>
             <th>
                 Outros
@@ -30,32 +27,31 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @item.TipoDeUnidade
-            </td>
-            <td>
-                @item.NumeroUnidade
-            </td>
-            <td>
-                @if (item.IdMorador > 0)
-                {
-                    @Html.ActionLink("Detalhes do Morador","Detalhes","Morador",new { idMorador = item.IdMorador}, new { @class = "btn btn-primary"})
-                }
-                else
-                {
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.TipoDeUnidade
+                </td>
+                <td>
+                    @item.NumeroUnidade
+                </td>
+                <td>
+                    @if (item.IdMorador != 0)
+                    {
+                        @Html.ActionLink("Detalhes do Morador", "Detalhes", "Morador", new { idMorador = item.IdMorador }, new { @class = "btn btn-primary" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Adicionar Morador", "AdicionarMorador", "Unidade", new { idUnidade = item.IdUnidade }, new { @class = "btn btn-primary" })
 
-                }
-            </td>
-            <td>
-                @if(item.)
-            </td>
-            <td>
-                @Html.ActionLink("Deletar", "deletar", "Condominio", new { id = item.IdMorador }, new { @class = "btn btn-primary" })
-                @Html.ActionLink("Editar", "editar", "Condominio", new { id = item.IdMorador }, new { @class = "btn btn-primary" })
-            </td>
-        </tr>
-}
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Deletar", "deletar", "Condominio", new { id = item.IdMorador }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Editar", "Editar", "Unidade", new { id = item.IdUnidade }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
