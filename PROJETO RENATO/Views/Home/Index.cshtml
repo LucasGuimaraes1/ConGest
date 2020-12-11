@@ -1,0 +1,18 @@
+﻿@model PROJETO_RENATO.Models.Usuario
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="text-center bodyImage">
+    <center>
+        <img src="~/logo.png"/> 
+        <form asp-action="Login" style="width:250px;">
+            <input asp-for="UsuarioAcesso" placeholder="Usuario de acesso" class="form-control" /><br />
+            <input asp-for="SenhaAcesso" type="password" placeholder="Senha de acesso" class="form-control" /><br />
+            <button type="submit" class="btn btn-outline-success">Entrar</button>
+            <a class="btn btn-outline-primary" href="/Home/Cadastro">Cadastrar</a>
+        </form>
+    </center>
+
+</div>

@@ -1,0 +1,44 @@
+﻿@model PROJETO_RENATO.Models.Condominio
+
+@{
+    ViewData["Title"] = "AdicionarCondominio";
+}
+
+<h1>Adicionar Condominio</h1>
+
+<h4>Condominio</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Criar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                Nome do Condominio
+                <input asp-for="NomeCondominio" class="form-control" />
+                <span asp-validation-for="NomeCondominio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                CNPJ
+                <input asp-for="Cnpj" class="form-control" />
+                <span asp-validation-for="Cnpj" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Endereço
+                <input asp-for="Endereco" class="form-control" />
+                <span asp-validation-for="Endereco" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Criar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Voltar a lista", "ListarCondominios", "Condominio",new { id = ViewBag.id}, new { @class="btn btn-primary"})
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

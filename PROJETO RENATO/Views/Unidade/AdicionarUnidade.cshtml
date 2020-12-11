@@ -1,0 +1,39 @@
+﻿@model PROJETO_RENATO.Models.Unidade
+
+@{
+    ViewData["Title"] = "AdicionarUnidade";
+}
+
+<h1>Adicionar Unidade</h1>
+
+<h4>Unidade</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AdicionarUnidade">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="idCondominio" type="hidden" value="@ViewBag.CondominioID" />
+            <div class="form-group">
+                Tipo de Unidade: Casa ou Apartamento
+                <select class="form-control" asp-for="TipoDeUnidade">
+                    <option hidden value="">Selecione uma opção</option>
+                    <option value="Casa">Casa</option>
+                    <option value="Apartamento">Apartamento</option>
+                </select>
+            </div>
+            <div class="form-group">
+                Numero da Unidade
+                <input asp-for="NumeroUnidade" class="form-control" />
+                <span asp-validation-for="NumeroUnidade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Criar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>
+
