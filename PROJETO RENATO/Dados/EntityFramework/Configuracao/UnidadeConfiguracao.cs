@@ -15,7 +15,7 @@ namespace PROJETO_RENATO.Dados.EntityFramework.Configuracao
             builder.ToTable("Unidade", "db_AppAdministrativo");
             builder.HasKey("IdUnidade");
             builder.Property(t => t.IdUnidade).HasColumnName("IdUnidade").HasColumnType("int");
-            builder.Property(t => t.TipoDeUnidade).HasColumnName("TipoDeUnidade").HasColumnType("string");
+            builder.Property(t => t.UnidadeTipoId).HasColumnName("UnidadeTipoId").HasColumnType("int");
             builder.Property(t => t.IdMorador).HasColumnName("IdMorador").HasColumnType("int");
             builder.Property(t => t.NumeroUnidade).HasColumnName("NumeroUnidade").HasColumnType("int");
             builder.Property(t => t.idCondominio).HasColumnName("idCondominio").HasColumnType("int");

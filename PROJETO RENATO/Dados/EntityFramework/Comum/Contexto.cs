@@ -17,16 +17,11 @@ namespace PROJETO_RENATO.Dados.EntityFramework.Comum
         public DbSet<Sindico> Sindico { get; set; }
         public DbSet<Suporte> Suporte { get; set; }
         public DbSet<SuporteClone> SuporteClone { get; set; }
-
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Condominio> Condominio { get; set; }
         public DbSet<Morador> Morador { get; set; }
         public DbSet<Unidade> Unidade { get; set; }
-        
-       
-
-
-
+        public DbSet<TipoUnidade> TipoUnidade { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -41,10 +36,7 @@ namespace PROJETO_RENATO.Dados.EntityFramework.Comum
             modelBuilder.ApplyConfiguration(new CondominioConfiguracao());
             modelBuilder.ApplyConfiguration(new MoradorConfiguracao());
             modelBuilder.ApplyConfiguration(new UnidadeConfiguracao());
-           
-
-
-
+            modelBuilder.ApplyConfiguration(new TipoUnidadeConfiguracao());
             base.OnModelCreating(modelBuilder);
         }
 
@@ -55,9 +47,5 @@ namespace PROJETO_RENATO.Dados.EntityFramework.Comum
                                           user id = laboratorio;
                                           password = @laboratorio*;");
         }
-
-
-
-
     }
 }

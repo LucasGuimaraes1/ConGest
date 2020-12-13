@@ -19,10 +19,6 @@ namespace PROJETO_RENATO.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
 
         public IActionResult Privacy()
         {
@@ -35,17 +31,26 @@ namespace PROJETO_RENATO.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
 
-        public IActionResult Login(Usuario usuario)
+        [HttpPost]
+        public IActionResult Index(Usuario usuario)
         {
             Contexto db = new Contexto();
             List<Usuario> usuarios = db.Usuario.ToList();
-            Usuario user = usuarios.Find(l => l.UsuarioAcesso == usuario.UsuarioAcesso && l.SenhaAcesso == usuario.SenhaAcesso); 
-            if(user != null)
+            Usuario user = usuarios.Find(l => l.UsuarioAcesso == usuario.UsuarioAcesso);
+            if (user != null && user.SenhaAcesso == usuario.SenhaAcesso)
             {
-                return RedirectToAction("ListarCondominios", "Condominio",new { id = user.UsuarioId });
+                return RedirectToAction("ListarCondominios", "Condominio", new { id = user.UsuarioId });
             }
-            return RedirectToAction("Index");
+            if(user != null && (user.SenhaAcesso != usuario.SenhaAcesso))
+            {
+                ModelState.AddModelError("SenhaAcesso", "Senha incorreta");
+            }
+            return View(usuario);
         }
 
         public IActionResult Cadastro()
@@ -54,17 +59,21 @@ namespace PROJETO_RENATO.Controllers
         }
 
         [HttpPost]
-        public IActionResult CadastroConfirm(Usuario usuario)
+        public IActionResult Cadastro(Usuario usuario)
         {
-            if (usuario == null && usuario.SenhaVerificacao != senhaAdm)
+            if (usuario == null || usuario.UsuarioAcesso == null || usuario.SenhaAcesso == null || usuario.Nome == null || usuario.SenhaVerificacao == null)
             {
-                return Json(new { message = "Usuario ou senha admin invalida.", status = 0 });
-            } 
+                return View(usuario);
+            }
+            if(usuario.SenhaVerificacao != senhaAdm)
+            {
+                ModelState.AddModelError("SenhaVerificacao", "Senha Administrativa incorreta");
+                return View(usuario);
+            }
             Contexto db = new Contexto();
             db.Usuario.Add(usuario);
             db.SaveChanges();
-            //return RedirectToAction("ListarCondominios", "Condominio", new { id = usuario.UsuarioId });
-            return Json(new { message = "Cadastrado com sucesso!", status = 1 });
+            return View("Index", usuario);
         }
     }
 }

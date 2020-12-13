@@ -1,0 +1,36 @@
+﻿@model PROJETO_RENATO.Models.Morador
+
+@{
+    ViewData["Title"] = "DetalhesProprietario";
+    ViewData["NomeUsuario"] = ViewBag.Usuario.Nome;
+}
+
+<h1>Detalhes do Proprietario</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Nome
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class = "col-sm-2">
+            CPF
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CPF)
+        </dd>
+        <dt class = "col-sm-2">
+            Email
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Editar dados", "EditarProprietario", "Unidade", new { id = Model.IdMorador,  usuarioId = ViewBag.Usuario.UsuarioId, condominioId = ViewBag.Condominio.IdCondominio }, new { @class="btn btn-primary"})
+    @Html.ActionLink("Voltar a lista de Unidades", "ListarUnidades", "Unidade", new { id = ViewBag.Usuario.UsuarioId,  condominioID = ViewBag.Condominio.IdCondominio }, new { @class="btn btn-primary"})
+</div>

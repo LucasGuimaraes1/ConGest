@@ -18,7 +18,7 @@ namespace PROJETO_RENATO.Dados.EntityFramework.Configuracao
             builder.Property(t => t.Valor).HasColumnName("Valor").HasColumnType("string");
             builder.Property(t => t.Tempo).HasColumnName("Tempo").HasColumnType("string");
             builder.Property(t => t.NomeSistema).HasColumnName("NomeSistema").HasColumnType("int");
-            builder.Property(t => t.TipoDeSistema).HasColumnName("TipoDeSistema").HasColumnType("int");
+            builder.Property(t => t.TipoDseSistema).HasColumnName("TipoDeSistema").HasColumnType("int");
         }
     }
 }

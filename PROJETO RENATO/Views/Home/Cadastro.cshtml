@@ -4,53 +4,40 @@
     ViewData["Title"] = "Cadastrar";
 }
 
-<h1>Cadastre sua Empresa</h1>
-
-
+<h1>Cadastre o usuário de sua empresa</h1>
+<br />
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form id="formCadastro" asp-action="CadastroConfirm" asp-controller="Home">
+        <form asp-action="Cadastro" asp-controller="Home">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                Usuario Acesso
-                <input asp-for="UsuarioAcesso" class="form-control" />
-                <span asp-validation-for="UsuarioAcesso" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Senha Acesso
-                <input asp-for="SenhaAcesso" class="form-control" />
-                <span asp-validation-for="SenhaAcesso" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
+                Nome do Usuário
                 <input asp-for="Nome" class="form-control" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                Senha Verificação
+                Usuario de Acesso
+                <input asp-for="UsuarioAcesso" class="form-control" />
+                <span asp-validation-for="UsuarioAcesso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Senha de Acesso
+                <input type="password" asp-for="SenhaAcesso" class="form-control" />
+                <span asp-validation-for="SenhaAcesso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Senha Administrativa
                 <input type="password" asp-for="SenhaVerificacao" class="form-control" />
                 <span asp-validation-for="SenhaVerificacao" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <button class="btn btn-primary" id="btnCreateUsuario">Criar</button>
-                @*<input type="submit" value="Create" class="btn btn-primary" />*@
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Voltar</a>
+    @Html.ActionLink("Voltar a tela de Login", "Index", "Home", null, new { @class="btn btn-primary"})
 </div>
-
-
-<script>
-    $(document).on("#btnCreateUsuario", "click", function (e) {
-
-        $("#formCadastro").submit()
-
-        e.stopImmediatePropagation();
-    })
-</script>
-

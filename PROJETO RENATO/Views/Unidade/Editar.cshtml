@@ -2,26 +2,29 @@
 
 @{
     ViewData["Title"] = "Editar";
+    ViewData["NomeUsuario"] = ViewBag.Usuario.Nome;
 }
 
-<h1>Editar</h1>
-
-<h4>Unidade</h4>
+<h1>Editar Unidade</h1>
+<br />
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Editar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdUnidade" />
+            <input type="hidden" asp-for="idCondominio" />
+            <input type="hidden" asp-for="IdMorador" value="@Model.IdMorador"/>
             <div class="form-group">
-                <label asp-for="TipoDeUnidade" class="control-label"></label>
-                <input asp-for="TipoDeUnidade" class="form-control" />
-                <span asp-validation-for="TipoDeUnidade" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdMorador" class="control-label"></label>
-                <input asp-for="IdMorador" class="form-control" />
-                <span asp-validation-for="IdMorador" class="text-danger"></span>
+                Tipo de Unidade
+                <select class="form-control" asp-for="UnidadeTipoId">
+                    <option selected hidden disabled>Selecione um tipo</option>
+                    @foreach (TipoUnidade tipoUnidade in ViewBag.TipoUnidade)
+                    {
+                        <option value="@tipoUnidade.TipoUnidadeID">@tipoUnidade.Descricao</option>
+                    }
+                </select>
+                <span asp-validation-for="UnidadeTipoId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="NumeroUnidade" class="control-label"></label>
@@ -29,18 +32,13 @@
                 <span asp-validation-for="NumeroUnidade" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="idCondominio" class="control-label"></label>
-                <input asp-for="idCondominio" class="form-control" />
-                <span asp-validation-for="idCondominio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Salvar" asp-route-usuarioId="@ViewBag.Usuario.UsuarioId" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Voltar a lista de unidades","ListarUnidades","Unidade",new { id = ViewBag.Usuario.UsuarioId,  condominioID = Model.idCondominio},new {@class="btn btn-primary" })
 </div>
 

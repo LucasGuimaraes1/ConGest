@@ -4,12 +4,14 @@
 }
 
 
-<div class="text-center bodyImage">
+<div class="text-center" style="margin-top: 10%">
     <center>
-        <img src="~/logo.png"/> 
-        <form asp-action="Login" style="width:250px;">
-            <input asp-for="UsuarioAcesso" placeholder="Usuario de acesso" class="form-control" /><br />
-            <input asp-for="SenhaAcesso" type="password" placeholder="Senha de acesso" class="form-control" /><br />
+        <img src="https://github.com/LucasGuimaraes1/ConGest/blob/master/PROJETO%20RENATO/wwwroot/LOGObRANCA.png?raw=true"/> <br />
+        <form asp-action="Index" style="width:250px; margin-top:5%; color:white">
+            <input asp-for="UsuarioAcesso" placeholder="Usuario de acesso" class="form-control" />
+            <span asp-validation-for="UsuarioAcesso" class="text-danger"></span><br />
+            <input asp-for="SenhaAcesso" type="password" placeholder="Senha de acesso" class="form-control" />
+            <span asp-validation-for="SenhaAcesso" class="text-danger"></span><br /><br />
             <button type="submit" class="btn btn-outline-success">Entrar</button>
             <a class="btn btn-outline-primary" href="/Home/Cadastro">Cadastrar</a>
         </form>

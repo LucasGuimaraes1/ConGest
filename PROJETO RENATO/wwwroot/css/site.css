@@ -28,11 +28,13 @@ a {
 -------------------------------------------------- */
 html {
   font-size: 14px;
+  background-color: rgb(0,17,31) !important;
 }
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+        background-color: rgb(0,17,31) !important;
+    }
 }
 
 .border-top {
@@ -54,13 +56,15 @@ button.accept-policy {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
+    background-color: rgb(0,17,31) !important;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background-color: rgb(0,17,31) !important;
 }
 .footer {
   position: absolute;

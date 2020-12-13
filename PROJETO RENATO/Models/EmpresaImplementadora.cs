@@ -13,9 +13,5 @@ namespace PROJETO_RENATO.Models
         public string NomeProprietario { get; set; }
         public string Cidade { get; set; }
         public string UF { get; set; }
-
-
-
-
     }
 }

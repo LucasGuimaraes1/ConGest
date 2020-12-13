@@ -2,11 +2,11 @@
 
 @{
     ViewData["Title"] = "editar";
+    ViewData["NomeUsuario"] = ViewBag.Usuario.Nome;
 }
 
-<h1>Editar</h1>
-
-<h4>Condominio</h4>
+<h1>Editar Condomínio</h1>
+<br />
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -29,14 +29,14 @@
                 <span asp-validation-for="Endereco" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" asp-route-usuarioId="@ViewBag.Usuario.UsuarioId" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Voltar à lista de condomínios", "ListarCondominios", "Condominio", new { id = ViewBag.Usuario.UsuarioId}, new { @class="btn btn-primary"})
 </div>
 
 @section Scripts {

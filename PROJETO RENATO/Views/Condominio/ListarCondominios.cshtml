@@ -2,14 +2,15 @@
 
 @{
     ViewData["Title"] = "ListarCondominios";
+    ViewData["NomeUsuario"] = ViewBag.Usuario.Nome;
 }
 
-<h1>Listar condominios</h1>
-
+<h1>Condominios</h1>
+<br />
 <p>
-    <a class="btn btn-primary" asp-action="AdicionarCondominio">Adicionar novo condomínio</a>
+    @Html.ActionLink("Adicionar novo condominio", "AdicionarCondominio", "Condominio", new { usuarioId = ViewBag.Usuario.UsuarioId }, new { @class = "btn btn-primary" })
 </p>
-<table class="table">
+<table class="table" style="color:white !important;">
     <thead>
         <tr>
             <th>
@@ -21,28 +22,30 @@
             <th>
                 Endereço
             </th>
-            <th></th>
+            <th>
+                Botões Úteis
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomeCondominio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cnpj)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Endereco)
-            </td>
-            <td>
- 
-                @Html.ActionLink("Deletar", "deletar", "Condominio", new { id = item.IdCondominio }, new { @class = "btn btn-primary" })
-                @Html.ActionLink("Unidades", "ListarUnidades", "Unidade", new { id = ViewBag.UsuarioId, condominioID = item.IdCondominio }, new { @class = "btn btn-primary" })
-                @Html.ActionLink("Editar", "editar", "Condominio", new { id = item.IdCondominio }, new { @class = "btn btn-primary" })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink($"{item.NomeCondominio}", "Detalhes", "Condominio", new { condominioId = item.IdCondominio, usuarioId = ViewBag.Usuario.UsuarioId}, new { @style = "text-decotarion:none; color:white;" })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cnpj)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Endereco)
+                </td>
+                <td>
+                    @Html.ActionLink("Unidades", "ListarUnidades", "Unidade", new { id = ViewBag.Usuario.UsuarioId, condominioID = item.IdCondominio }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Editar", "editar", "Condominio", new { id = item.IdCondominio, usuarioId = ViewBag.Usuario.UsuarioId }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Deletar", "deletar", "Condominio", new { id = item.IdCondominio }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

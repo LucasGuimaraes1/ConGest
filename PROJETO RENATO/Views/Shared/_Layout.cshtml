@@ -7,32 +7,45 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
+<body style="background-color: rgb(0,17,31) !important; color:white;">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color:#1b6ec2 !important; color:white !important;">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ConGest</a>
+                <a class="navbar-brand" style="color:white !important;" asp-controller="Home" asp-action="Index">ConGest</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div class="float-right">
                     <ul class="navbar-nav flex-grow-1">
-                       
+                        @if (ViewData["NomeUsuario"] != null)
+                        {
+                            <li class="float-right" style="padding-right:20px">
+                                <a>@ViewData["NomeUsuario"]</a>
+                            </li>
+                            <li>
+                                @Html.ActionLink("Sair", "Index", "Home", null, new { @style = "text-decoration:none; color:white" })
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3" style="color:white !important">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted" style="background-color:rgb(255,205,0);">
         <div class="container">
-            &copy; 2020 - PROJETO_RENATO - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="float-left">
+                &copy; 2020 - ConGest - Primeiro Protótipo
+            </div>
+            <div class="float-right">
+                Lucas de Paula Guimarães
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

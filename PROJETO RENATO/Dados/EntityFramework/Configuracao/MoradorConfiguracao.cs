@@ -18,7 +18,6 @@ namespace PROJETO_RENATO.Dados.EntityFramework.Configuracao
             builder.Property(t => t.Nome).HasColumnName("Nome").HasColumnType("string");
             builder.Property(t => t.CPF).HasColumnName("CPF").HasColumnType("string");
             builder.Property(t => t.Email).HasColumnName("Email").HasColumnType("string");
-
         }
     }
 }

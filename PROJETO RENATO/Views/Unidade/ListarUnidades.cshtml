@@ -2,14 +2,17 @@
 
 @{
     ViewData["Title"] = "ListarUnidades";
+    ViewData["NomeUsuario"] = ViewBag.Usuario.Nome;
 }
 
-<h1>Listar Unidades</h1>
+<h1>@ViewBag.Condominio.NomeCondominio</h1>
+<br />
 
 <p>
-    @Html.ActionLink("Criar Novo", "AdicionarUnidade", "Unidade", new { condominioID = ViewBag.CondominioID }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Criar Novo", "AdicionarUnidade", "Unidade", new { id = ViewBag.Usuario.UsuarioId, condominioID = ViewBag.Condominio.IdCondominio }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Voltar a lista", "ListarCondominios", "Condominio", new { id = ViewBag.Usuario.UsuarioId }, new { @class = "btn btn-primary" })
 </p>
-<table class="table">
+<table class="table" style="color:white;">
     <thead>
         <tr>
             <th>
@@ -31,7 +34,7 @@
         {
             <tr>
                 <td>
-                    @item.TipoDeUnidade
+                    @item.tipoUnidade
                 </td>
                 <td>
                     @item.NumeroUnidade
@@ -39,17 +42,16 @@
                 <td>
                     @if (item.IdMorador != 0)
                     {
-                        @Html.ActionLink("Detalhes do Morador", "Detalhes", "Morador", new { idMorador = item.IdMorador }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Detalhes do Proprietário", "DetalhesProprietario", "Unidade", new { ProrietarioId = item.IdMorador, usuarioId = ViewBag.Usuario.UsuarioId, condominioId = item.idCondominio }, new { @class = "btn btn-primary" })
                     }
                     else
                     {
-                        @Html.ActionLink("Adicionar Morador", "AdicionarMorador", "Unidade", new { idUnidade = item.IdUnidade }, new { @class = "btn btn-primary" })
-
+                        @Html.ActionLink("Adicionar Proprietário", "AdicionarProprietario", "Unidade", new { unidadeId = item.IdUnidade, usuarioId = ViewBag.Usuario.UsuarioId }, new { @class = "btn btn-primary" })
                     }
                 </td>
                 <td>
-                    @Html.ActionLink("Deletar", "deletar", "Condominio", new { id = item.IdMorador }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Editar", "Editar", "Unidade", new { id = item.IdUnidade }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Deletar", "deletar", "Unidade", new { id = item.IdUnidade, condominioId = ViewBag.Condominio.IdCondominio }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Editar", "Editar", "Unidade", new { id = item.IdUnidade, usuarioId = ViewBag.Usuario.UsuarioId }, new { @class = "btn btn-primary" })
                 </td>
             </tr>
         }

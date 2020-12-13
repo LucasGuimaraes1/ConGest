@@ -1,0 +1,35 @@
+﻿@model PROJETO_RENATO.Models.Condominio
+
+@{
+    ViewData["Title"] = "Detalhes";
+    ViewData["NomeUsuario"] = ViewBag.Usuario.Nome;
+}
+
+<h1>Detalhes do Condomínio</h1>
+<br />
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">
+            Nome do Condomínio
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.NomeCondominio)
+        </dd>
+        <dt class="col-sm-3">
+            CNPJ
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Cnpj)
+        </dd>
+        <dt class="col-sm-3">
+            Endereço
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Endereco)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Voltar a lista de condomínios", "ListarCondominios", "Condominio", new { id = ViewBag.Usuario.UsuarioId}, new { @class="btn btn-primary"})
+</div>

@@ -2,11 +2,11 @@
 
 @{
     ViewData["Title"] = "AdicionarUnidade";
+    ViewData["NomeUsuario"] = ViewBag.Usuario.Nome;
 }
 
-<h1>Adicionar Unidade</h1>
-
-<h4>Unidade</h4>
+<h1>Adicionar nova Unidade</h1>
+<br />
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,26 +14,29 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="idCondominio" type="hidden" value="@ViewBag.CondominioID" />
             <div class="form-group">
-                Tipo de Unidade: Casa ou Apartamento
-                <select class="form-control" asp-for="TipoDeUnidade">
-                    <option hidden value="">Selecione uma opção</option>
-                    <option value="Casa">Casa</option>
-                    <option value="Apartamento">Apartamento</option>
+                Tipo de Unidade:
+                <select class="form-control" asp-for="UnidadeTipoId">
+                    <option hidden value="0">Selecione uma opção</option>
+                    @foreach (TipoUnidade tipoUnidade in ViewBag.TipoUnidade)
+                    {
+                        <option value="@tipoUnidade.TipoUnidadeID">@tipoUnidade.Descricao</option>
+                    }
                 </select>
+                <span asp-validation-for="UnidadeTipoId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 Numero da Unidade
-                <input asp-for="NumeroUnidade" class="form-control" />
+                <input asp-for="NumeroUnidade" class="form-control"/>
                 <span asp-validation-for="NumeroUnidade" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Criar" class="btn btn-primary" />
+                <input type="submit" value="Criar" asp-route-id="@ViewBag.Usuario.UsuarioId" asp-route-condominioID ="@ViewBag.Condominio.IdCondominio" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Voltar</a>
+    @Html.ActionLink("Voltar a lista de Unidades", "ListarUnidades", "Unidade", new { id = ViewBag.Usuario.UsuarioId , condominioID = ViewBag.Condominio.IdCondominio }, new { @class="btn btn-primary"})
 </div>
 

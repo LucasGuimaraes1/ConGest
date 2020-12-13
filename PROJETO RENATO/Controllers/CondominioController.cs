@@ -11,34 +11,39 @@ namespace PROJETO_RENATO.Controllers
     public class CondominioController : Controller
     {
         static Usuario usuario = new Usuario();
+        Contexto db = new Contexto();
         public IActionResult ListarCondominios(int id)
         {
-            Contexto db = new Contexto();
             List<Usuario> usuarios = db.Usuario.ToList();
             usuario = usuarios.Find(l => l.UsuarioId == id);
             List<Condominio> condominios = db.Condominio.ToList();
             if (usuario != null)
             {
-                ViewBag.UsuarioId = usuario.UsuarioId;
+                foreach (Condominio condominio in condominios)
+                {
+                    if (condominio.Endereco.Length > 30)
+                        condominio.Endereco = condominio.Endereco.Substring(0, 30) + "...";
+                }
+                ViewBag.Usuario = usuario;
                 return View(condominios);
             }
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult AdicionarCondominio()
+        public IActionResult AdicionarCondominio(int usuarioId)
         {
-            ViewBag.id = usuario.UsuarioId;
+            usuario = db.Usuario.Find(usuarioId);
+            ViewBag.Usuario = usuario;
             return View();
         }
 
         [HttpPost]
-        public IActionResult Criar(Condominio condominio)
+        public IActionResult AdicionarCondominio(int usuarioId, Condominio condominio)
         {
-            Contexto db = new Contexto();
-            if (condominio == null)
+            if ((string.IsNullOrEmpty(condominio.NomeCondominio) || string.IsNullOrEmpty(condominio.Cnpj) || string.IsNullOrEmpty(condominio.Endereco)) || (condominio.Cnpj.Length != 18 || condominio.Endereco.Length < 3 || condominio.NomeCondominio.Length < 3))
             {
-                return RedirectToAction("AdicionarCondominio");
-
+                ViewBag.Usuario = db.Usuario.Find(usuarioId);
+                return View(condominio);
             }
             db.Condominio.Add(condominio);
             db.SaveChanges();
@@ -48,32 +53,40 @@ namespace PROJETO_RENATO.Controllers
 
         public IActionResult deletar(int Id)
         {
-            Contexto db = new Contexto();
             Condominio condominio = db.Condominio.Find(Id);
-            db.Condominio.Remove(condominio);
-            db.SaveChanges();
-            return RedirectToAction("ListarCondominios",new { id = usuario.UsuarioId });
+            if (condominio != null)
+            {
+                db.Condominio.Remove(condominio);
+                db.SaveChanges();
+            }
+            return RedirectToAction("ListarCondominios", new { id = usuario.UsuarioId });
         }
 
-        public IActionResult editar(int Id)
+        public IActionResult editar(int Id, int usuarioId)
         {
-            Contexto db = new Contexto();
             Condominio condominio = db.Condominio.Find(Id);
+            ViewBag.Usuario = db.Usuario.Find(usuarioId);
             return View(condominio);
         }
 
         [HttpPost]
-        public IActionResult editar(Condominio condominio)
+        public IActionResult editar(Condominio condominio, int usuarioId)
         {
-            Contexto db = new Contexto();
-            if (condominio.Endereco == null || condominio.Cnpj == null || condominio.NomeCondominio == null )
+            if (condominio.Endereco == null || condominio.Cnpj == null || condominio.NomeCondominio == null)
             {
+                ViewBag.Usuario = db.Usuario.Find(usuarioId);
                 return View(condominio);
             }
             db.Condominio.Update(condominio);
             db.SaveChanges();
             return RedirectToAction("ListarCondominios", new { id = usuario.UsuarioId });
         }
-       
+
+        public IActionResult Detalhes(int condominioId, int usuarioId)
+        {
+            ViewBag.Usuario = db.Usuario.Find(usuarioId);
+            return View(db.Condominio.Find(condominioId));
+        }
+
     }
 }

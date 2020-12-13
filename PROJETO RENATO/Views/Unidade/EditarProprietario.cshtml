@@ -1,0 +1,45 @@
+﻿@model PROJETO_RENATO.Models.Morador
+
+@{
+    ViewData["Title"] = "EditarProprietario";
+    ViewData["NomeUsuario"] = ViewBag.Usuario.Nome;
+}
+
+<h1>EditarProprietario</h1>
+
+<h4>Morador</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditarProprietario">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdMorador" />
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CPF" class="control-label"></label>
+                <input asp-for="CPF" class="form-control" />
+                <span asp-validation-for="CPF" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" type="email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar" asp-route-usuarioId="@ViewBag.Usuario.UsuarioId" asp-route-condominioId="@ViewBag.Condominio.IdCondominio" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Voltar ao detalhes do Proprietario", "DetalhesProprietario","Unidade", new { ProrietarioId = Model.IdMorador, usuarioId = ViewBag.Usuario.UsuarioId, condominioId = ViewBag.Condominio.IdCondominio }, new { @class="btn btn-primary"})
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
